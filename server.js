@@ -17,8 +17,6 @@ app.use(express.static('public'));
 // routes
 require('./routes/routes.js')(app)
 
-let test = require('./routes/scrape')
-
 // port
 const PORT = process.env.PORT || 3000
 app.listen(PORT, () => console.log('Listening on port ' + PORT))
