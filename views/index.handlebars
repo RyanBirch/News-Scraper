@@ -2,7 +2,6 @@
 <div class="container">
 
   {{#each articles}}
-
     <div class="card news-card">
       <div class="card-body">
         <h3 class="card-title">{{title}}</h3>
@@ -10,10 +9,9 @@
         <a href="{{link}}" target="_blank">{{link}}</a>
         <br><br>
         <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#viewCommentsModal">View Comments</button>
-        <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#addCommentModal">Add a Comment</button>
+        <button id="addCommentBtn" class="btn btn-primary" type="button" data-toggle="modal" data-target="#addCommentModal" data-id="{{_id}}">Add a Comment</button>
       </div>
     </div>
-
   {{/each}}
 
 </div>
@@ -50,7 +48,15 @@
         </button>
       </div>
       <div class="modal-body">
-        <div id="commentsDisplay"></div>
+        <div id="commentsDisplay">
+          <ul>
+
+            {{#each comments}}
+              <li>{{body}}</li>
+            {{/each}}
+
+          </ul>
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
