@@ -31,7 +31,8 @@ function scrape() {
           db.Article.create({
               title: result.title,
               link: result.link,
-              summary: result.summary
+              summary: result.summary,
+              dateAdded: Date.now()
             })
             .then(() => {
               console.log('Entry added')
@@ -43,7 +44,7 @@ function scrape() {
       })
     })
     .catch(err => console.log(err)) // catch axios errors
-    resolve(console.log('Scrape successful'))
+    resolve('Scrape successful')
   })
 }
 

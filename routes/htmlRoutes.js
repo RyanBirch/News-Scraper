@@ -7,9 +7,11 @@ module.exports = app => {
     // scrape articles
     scrape().then(() => {
       // grab all articles from database
-      db.Article.find({})
+      db.Article.find({}).sort({ dateAdded: -1 })
         .then(data => {
-          res.json(data)
+          res.render('index', {
+            articles: data
+          })
         })
         .catch(err => res.json(err))
     })

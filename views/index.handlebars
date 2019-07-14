@@ -1,0 +1,60 @@
+{{!-- articles --}}
+<div class="container">
+
+  {{#each articles}}
+
+    <div class="card news-card">
+      <div class="card-body">
+        <h3 class="card-title">{{title}}</h3>
+        <p class="card-text">{{summary}}</p>
+        <a href="{{link}}" target="_blank">{{link}}</a>
+        <br><br>
+        <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#viewCommentsModal">View Comments</button>
+        <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#addCommentModal">Add a Comment</button>
+      </div>
+    </div>
+
+  {{/each}}
+
+</div>
+
+<!-- Add a Comment Modal -->
+<div class="modal fade" id="addCommentModal" tabindex="-1" role="dialog" aria-labelledby="addCommentModalTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addCommentModalTitle">Comment</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <textarea name="comment" id="comment" cols="50" rows="5"></textarea>
+      </div>
+      <div class="modal-footer">
+        <button id="viewComments" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button id="submitComment" type="button" class="btn btn-success">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- View Comments Modal -->
+<div class="modal fade" id="viewCommentsModal" tabindex="-1" role="dialog" aria-labelledby="viewCommentsModalTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="viewCommentsModalTitle">Comments</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div id="commentsDisplay"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

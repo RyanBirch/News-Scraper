@@ -15,6 +15,10 @@ const ArticleSchema = new Schema({
     type: String,
     required: true
   },
+  dataAdded: {
+    type: Date,
+    default: Date.now()
+  },
   comments: [
     {
       type: Schema.Types.ObjectId,
