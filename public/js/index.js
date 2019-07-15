@@ -1,42 +1,3 @@
-// $(document).on('click', '#submitComment', function() {
-
-//   let comment = $('#comment').val().trim()
-//   let articleID = $('#addCommentBtn').attr('data-id')
-
-//   $.post('/api/addComment', {
-//     comment: comment,
-//     articleID: articleID
-//   })
-//   .then(data => {
-//     console.log(data)
-//     $('#addCommentModal').toggle()
-//     $(".modal-backdrop").remove()
-//   })
-// })
-
-
-// $(document).on('click', '#viewCommentsBtn', function() {
-//   $('#commentsDisplay').html('')
-//   let articleID = $(this).attr('data-id')
-
-//   $.get(`/api/getComments/${articleID}`)
-//   .then(data => {
-//     console.log(data)
-//     data.comments.forEach(item => {
-//       document.getElementById('commentsDisplay').innerHTML += 
-//       `
-//         <p>${item.body}</p>
-//       `
-//     })
-//   })
-// })
-
-$(document).on('click', '#submitComment', submitComment)
-$(document).on('click', '#viewCommentsBtn', viewComments)
-
-
-$(document).on('click', '#addCommentBtn', passID)
-
 // pass current article id to modal so we know which article id to use
 function passID() {
   $('#submitComment').attr('data-id', $(this).attr('data-id'))
@@ -80,8 +41,34 @@ function viewComments() {
     data.comments.forEach(item => {
       document.getElementById('commentsDisplay').innerHTML += 
       `
-        <p>${item.body}</p>
+        <div>
+          <li data-id="${item._id}">${item.body}</li>
+          <button id="deleteComment" class="btn btn-danger">Delete</button>
+        </div>
       `
     })
   })
 }
+
+function deleteComment() {
+  let thisDiv = $(this).parent('div')
+  let commentID = $(this).siblings('li').attr('data-id')
+
+  $.ajax({
+    url: `/api/deleteComment/${commentID}`,
+    type: 'DELETE',
+    success: function(data) {
+      console.log(data)
+      // $('#viewCommentsModal').modal('hide')
+      thisDiv.empty()
+    },
+    error: function(data) {
+      console.log(data)
+    }
+  })
+}
+
+$(document).on('click', '#submitComment', submitComment)
+$(document).on('click', '#viewCommentsBtn', viewComments)
+$(document).on('click', '#deleteComment', deleteComment)
+$(document).on('click', '#addCommentBtn', passID)

@@ -2,6 +2,7 @@ const db = require('../models')
 
 module.exports = app => {
 
+  // add a comment to the database
   app.post('/api/addComment', (req, res) => {
 
     // insert comment into comments collection
@@ -24,11 +25,18 @@ module.exports = app => {
     .catch(err => console.log(err))
   })
 
+  // get comments for a specific article
   app.get('/api/getComments/:id', (req, res) => {
-    // get comments for a specific article
     db.Article.findOne({ _id: req.params.id })
       .populate('comments')
       .then(dbArticle => res.json(dbArticle))
+      .catch(err => res.json(err))
+  })
+
+  // delete a comment
+  app.delete('/api/deleteComment/:id', (req, res) => {
+    db.Comment.deleteOne({ _id: req.params.id })
+      .then(() => res.sendStatus(200))
       .catch(err => res.json(err))
   })
 }

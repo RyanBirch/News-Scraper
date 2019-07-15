@@ -12,7 +12,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
 // make public a static folder
-app.use(express.static('public'));
+app.use(express.static('public'))
 
 // handlebars
 const exphbs = require('express-handlebars')

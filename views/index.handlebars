@@ -1,7 +1,12 @@
 {{!-- articles --}}
 <div class="container">
 
+  <div class="scrape text-center mt-5 mb-5">
+    <a href="/" class="btn btn-success">Scrape articles</a>
+  </div>
+
   {{#each articles}}
+
     <div class="card news-card">
       <div class="card-body">
         <h3 class="card-title">{{title}}</h3>
@@ -12,6 +17,7 @@
         <button id="addCommentBtn" class="btn btn-primary" type="button" data-toggle="modal" data-target="#addCommentModal" data-id="{{_id}}">Add a Comment</button>
       </div>
     </div>
+
   {{/each}}
 
 </div>
@@ -49,7 +55,8 @@
       </div>
       <div class="modal-body">
         <div id="commentsDisplay">
-         
+         {{!-- comments will go here --}}
+         <ul></ul>
         </div>
       </div>
       <div class="modal-footer">
