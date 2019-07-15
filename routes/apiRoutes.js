@@ -39,4 +39,15 @@ module.exports = app => {
       .then(() => res.sendStatus(200))
       .catch(err => res.json(err))
   })
+
+  // delete all articles and comments
+  app.delete('/api/clear', (req, res) => {
+    db.Article.deleteMany({})
+      .then(() => {
+        db.Comment.deleteMany({})
+          .then(() => res.sendStatus(200))
+          .catch(err => res.json(err))
+      })
+      .catch(err => res.json(err))
+  })
 }

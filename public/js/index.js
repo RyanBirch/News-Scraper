@@ -59,7 +59,6 @@ function deleteComment() {
     type: 'DELETE',
     success: function(data) {
       console.log(data)
-      // $('#viewCommentsModal').modal('hide')
       thisDiv.empty()
     },
     error: function(data) {
@@ -68,7 +67,18 @@ function deleteComment() {
   })
 }
 
+function deleteArticles() {
+  $.ajax({
+    url: 'api/clear',
+    type: 'DELETE',
+    success: function() {
+      $('#articleDiv').empty()
+    } 
+  })
+}
+
 $(document).on('click', '#submitComment', submitComment)
 $(document).on('click', '#viewCommentsBtn', viewComments)
 $(document).on('click', '#deleteComment', deleteComment)
 $(document).on('click', '#addCommentBtn', passID)
+$(document).on('click', '#clearArticles', deleteArticles)
