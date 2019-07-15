@@ -23,4 +23,12 @@ module.exports = app => {
     })
     .catch(err => console.log(err))
   })
+
+  app.get('/api/getComments/:id', (req, res) => {
+    // get comments for a specific article
+    db.Article.findOne({ _id: req.params.id })
+      .populate('comments')
+      .then(dbArticle => res.json(dbArticle))
+      .catch(err => res.json(err))
+  })
 }

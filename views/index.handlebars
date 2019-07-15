@@ -8,7 +8,7 @@
         <p class="card-text">{{summary}}</p>
         <a href="{{link}}" target="_blank">{{link}}</a>
         <br><br>
-        <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#viewCommentsModal">View Comments</button>
+        <button id="viewCommentsBtn" class="btn btn-primary" type="button" data-toggle="modal" data-target="#viewCommentsModal" data-id="{{_id}}">View Comments</button>
         <button id="addCommentBtn" class="btn btn-primary" type="button" data-toggle="modal" data-target="#addCommentModal" data-id="{{_id}}">Add a Comment</button>
       </div>
     </div>
@@ -30,8 +30,8 @@
         <textarea name="comment" id="comment" cols="50" rows="5"></textarea>
       </div>
       <div class="modal-footer">
-        <button id="viewComments" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button id="submitComment" type="button" class="btn btn-success">Submit</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button id="submitComment" type="button" class="btn btn-success" data-id="">Submit</button>
       </div>
     </div>
   </div>
@@ -49,13 +49,7 @@
       </div>
       <div class="modal-body">
         <div id="commentsDisplay">
-          <ul>
-
-            {{#each comments}}
-              <li>{{body}}</li>
-            {{/each}}
-
-          </ul>
+         
         </div>
       </div>
       <div class="modal-footer">
