@@ -25,6 +25,7 @@ module.exports = app => {
     .catch(err => console.log(err))
   })
 
+
   // get comments for a specific article
   app.get('/api/getComments/:id', (req, res) => {
     db.Article.findOne({ _id: req.params.id })
@@ -33,12 +34,23 @@ module.exports = app => {
       .catch(err => res.json(err))
   })
 
+
   // delete a comment
-  app.delete('/api/deleteComment/:id', (req, res) => {
-    db.Comment.deleteOne({ _id: req.params.id })
-      .then(() => res.sendStatus(200))
+  app.delete('/api/deleteComment/:commentID/:articleID', (req, res) => {
+    // delete comment from comment collection
+    db.Comment.deleteOne({ _id: req.params.commentID })
+      .then(() => {
+        // delete reference to comment in article collection
+        db.Article.update({ _id: req.params.articleID }, {
+          $pull: { comments: req.params.commentID }
+        })
+        .then(() => res.sendStatus(200))
+        .catch(err => res.json(err))
+        
+      })
       .catch(err => res.json(err))
   })
+  
 
   // delete all articles and comments
   app.delete('/api/clear', (req, res) => {

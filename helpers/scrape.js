@@ -32,7 +32,7 @@ function scrape() {
               title: result.title,
               link: result.link,
               summary: result.summary,
-              dateAdded: Date.now()
+              dateAdded: Date.now
             })
             .then(() => {
               console.log('Entry added')

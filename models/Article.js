@@ -17,7 +17,7 @@ const ArticleSchema = new Schema({
   },
   dataAdded: {
     type: Date,
-    default: Date.now()
+    default: Date.now
   },
   comments: [
     {

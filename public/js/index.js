@@ -1,13 +1,20 @@
 // pass current article id to modal so we know which article id to use
-function passID() {
+function pass_id_to_submit() {
   $('#submitComment').attr('data-id', $(this).attr('data-id'))
 }
+
+// pass article id to modal so we know which article we need to delete the ref from
+function pass_id_to_delete() {
+  $('#viewCommentsModal').attr('data-article-id', $(this).attr('data-id'))
+}
+
 
 // submit a comment 
 function submitComment() {
 
   // get comment body and associated article id
   let comment = $('#comment').val().trim()
+  $('#comment').val('')
   // let articleID = $('#addCommentBtn').attr('data-id')
   let articleID = $(this).attr('data-id')
   console.log(articleID)
@@ -24,6 +31,7 @@ function submitComment() {
     $(".modal-backdrop").remove()
   })
 }
+
 
 // view comments for a specific article
 function viewComments() {
@@ -50,12 +58,16 @@ function viewComments() {
   })
 }
 
+
+// delete a comment
 function deleteComment() {
   let thisDiv = $(this).parent('div')
   let commentID = $(this).siblings('li').attr('data-id')
+  let articleID = $(this).parents('#viewCommentsModal').attr('data-article-id')
+
 
   $.ajax({
-    url: `/api/deleteComment/${commentID}`,
+    url: `/api/deleteComment/${commentID}/${articleID}`,
     type: 'DELETE',
     success: function(data) {
       console.log(data)
@@ -67,9 +79,11 @@ function deleteComment() {
   })
 }
 
+
+// delete all articles
 function deleteArticles() {
   $.ajax({
-    url: 'api/clear',
+    url: '/api/clear',
     type: 'DELETE',
     success: function() {
       $('#articleDiv').empty()
@@ -77,8 +91,10 @@ function deleteArticles() {
   })
 }
 
+
 $(document).on('click', '#submitComment', submitComment)
 $(document).on('click', '#viewCommentsBtn', viewComments)
 $(document).on('click', '#deleteComment', deleteComment)
-$(document).on('click', '#addCommentBtn', passID)
+$(document).on('click', '#addCommentBtn', pass_id_to_submit)
+$(document).on('click', '#viewCommentsBtn', pass_id_to_delete)
 $(document).on('click', '#clearArticles', deleteArticles)
