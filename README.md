@@ -38,4 +38,4 @@ Web scraper that scrapes articles from the home page of the Washington Post and 
 --- 
 
 ## Demo
-See the app here: <a href="#">News Scraper</a>
+See the app here: <a href="https://safe-shelf-26983.herokuapp.com">News Scraper</a>
